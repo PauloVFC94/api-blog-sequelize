@@ -10,4 +10,13 @@ const addUser = async (req, res, _next) => {
   return res.status(201).json({ token: newUser });
 };
 
-module.exports = { addUser };
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await userService.getAllUsers();
+    return res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { addUser, getAllUsers };
