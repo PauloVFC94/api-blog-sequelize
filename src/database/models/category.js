@@ -11,4 +11,4 @@ const Category = (sequelize, DataTypes) => {
   return Category;
 }
 
-module.exports = Category;
+module.exports = Category; 

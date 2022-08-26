@@ -6,13 +6,16 @@ const BlogPost = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
+  },
+  {
+    tablename: 'BlogPosts',
   });
 
   BlogPost.associate = (models) => {
-    BlogPost.belongsTo(models.User, {as: 'User', foreignKey: 'userId'})
+    BlogPost.belongsTo(models.User, {as: 'user', foreignKey: 'userId'})
   }
 
   return BlogPost;
 }
 
-module.exports = BlogPost;
+module.exports = BlogPost; 
