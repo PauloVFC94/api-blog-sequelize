@@ -1,12 +1,13 @@
 const userService = require('../services/userService');
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
-  const response = await userService.login({ email, password });
-  if (!response) {
-    return res.status(400).json({ message: 'Invalid fields' });
+const addUser = async (req, res, _next) => {
+  const { displayName, email, password, image } = req.body;
+  const newUser = await userService.addUser({ displayName, email, password, image });
+
+  if (!newUser) {
+    return res.status(409).json({ message: 'User already registered' });
   }
-  res.status(200).json({ token: response });
+  return res.status(201).json({ token: newUser });
 };
 
-module.exports = { login };
+module.exports = { addUser };

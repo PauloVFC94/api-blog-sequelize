@@ -1,12 +1,33 @@
 const joi = require('joi');
 
-const userSchema = joi.object({
+const ANY_REQUIRED = 'Some required fields are missing';
+const STRING_MIN = '{#label} length must be at least {#limit} characters long';
+
+const loginSchema = joi.object({
   email: joi.string().required().messages({
-    'any.required': 'Some required fields are missing',
+    'any.required': ANY_REQUIRED,
   }),
   password: joi.string().required().messages({
-    'any.required': 'Some required fields are missing',
+    'any.required': ANY_REQUIRED,
   }),
 });
 
-module.exports = { userSchema };
+const userSchema = joi.object({
+  displayName: joi.string().required().min(8).messages({
+    'string.min': STRING_MIN,
+    'any.required': ANY_REQUIRED,
+  }),
+  email: joi.string().email().required().messages({
+    'any.required': ANY_REQUIRED,
+    'string.email': '{#label} must be a valid email',
+  }),
+  password: joi.string().required().min(6).messages({
+    'string.min': STRING_MIN,
+    'any.required': ANY_REQUIRED,
+  }),
+  image: joi.string().required().messages({
+    'any.required': ANY_REQUIRED,
+  }),
+});
+
+module.exports = { loginSchema, userSchema };

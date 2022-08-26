@@ -1,15 +1,16 @@
 const { User } = require('../models');
 const tokenTool = require('../../helpers/token');
 
-const login = async ({ email, password }) => {
-  const response = await User.findOne({ where: { email, password } });
-
-  if (!response) {
+const addUser = async ({ displayName, email, password, image }) => {
+  const response = await User.findOne({ where: { email } });
+  if (response) {
     return null;
   }
 
-  const token = tokenTool.createToken({ email: response.email });
+  const newUser = await User.create({ displayName, email, password, image });
+  const token = tokenTool.createToken({ email: newUser.email });
+
   return token;
 };
 
-module.exports = { login };
+module.exports = { addUser };
