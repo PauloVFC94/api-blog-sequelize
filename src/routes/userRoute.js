@@ -9,4 +9,7 @@ router.route('/')
   .post(userValidation.userValidator, userController.addUser)
   .get(tokenValidation.tokenValidator, userController.getAllUsers);
 
+router.route('/:id')
+  .get(tokenValidation.tokenValidator, userController.getUserById);
+
 module.exports = router;
