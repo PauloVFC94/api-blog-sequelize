@@ -8,7 +8,7 @@ const login = async ({ email, password }) => {
     return null;
   }
 
-  const token = tokenTool.createToken({ email: response.email });
+  const token = tokenTool.createToken({ id: response.id, email: response.email });
   return token;
 };
 
