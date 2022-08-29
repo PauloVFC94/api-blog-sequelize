@@ -30,4 +30,10 @@ const userSchema = joi.object({
   }),
 });
 
-module.exports = { loginSchema, userSchema };
+const categorySchema = joi.object({
+  name: joi.string().required().messages({
+    'any.required': '{#label} is required',
+  }),
+});
+
+module.exports = { loginSchema, userSchema, categorySchema };
