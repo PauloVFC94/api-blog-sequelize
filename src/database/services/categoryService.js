@@ -11,4 +11,13 @@ const addCategory = async ({ name }) => {
   return newCategory;
 };
 
-module.exports = { addCategory };
+const getAllCategories = async () => {
+  const categories = await Category.findAll();
+  if (!categories) {
+    return null;
+  }
+
+  return categories;
+};
+
+module.exports = { addCategory, getAllCategories };
